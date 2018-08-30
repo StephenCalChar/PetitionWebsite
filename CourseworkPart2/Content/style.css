@@ -1,0 +1,237 @@
+
+/*Pre-nav bar area */
+.jumbotron {
+
+  text-align: center;
+}
+/*end pre nav bar */
+
+
+/* Start nav bar css */
+.navbar-nav {
+  width: 100%;
+}
+
+
+.navbar-nav > li {
+  color:white;
+  position: relative;
+  font-size: 1.2rem;
+}
+
+/*Assign curson when hovering over drop down list items */
+.dropdown-item {
+  cursor: pointer;
+
+}
+
+/* START NAV BAR adjustments for screen size */
+/*override nav bar size didplay so it looks more presentable for each screen size */
+@media (min-width: 768px) {
+  .navbar-nav > li {
+    padding-top: 0.5rem;
+    padding-right: 0rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1.7rem;
+    text-align: center;
+  }
+
+  /*Extra top padding for right coumn for large screens */
+  #rightMain {
+    margin-top: 22%;
+  }
+
+
+}
+
+/* Extra spacing for navbar for large screens */
+@media (min-width: 1200px) {
+  .navbar-nav > li {
+    padding-top: 0.5rem;
+    padding-right: 3rem;
+    padding-bottom: 0.5rem;
+    padding-left: 3rem;
+    text-align: center;
+    left: 8%;
+  }
+
+}
+/* END NAV BAR adjustments for screen size */
+
+
+
+
+
+
+/*START of main body CSS */
+
+#mainTitle, #sidebarTitle {
+  padding-top: 8%;
+  padding-bottom: 5%;
+  text-align: center;
+
+}
+
+#secondTitle {
+  padding-top: 5%;
+}
+
+#leftMain {
+  text-align: center;
+}
+
+#rightMain {
+  text-align: center;
+}
+
+
+hr {
+  height: 10%;
+
+}
+
+#sideImg {
+  height: 100%;
+  width: 100%;
+
+}
+
+.sideImgContainer  {
+  width: 90%;
+  height: 200px;
+  margin-left: 5%;
+  margin-right: 5%;
+
+
+}
+
+#latestPetTitle {
+  padding-left: 10%;
+  padding-right: 10%;
+  font-size: 120%;
+
+}
+
+
+/*START OF CAUSE EXAMPLE BUILDING IN MAIN */
+
+
+
+.outerCauseDiv{
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+
+.cause{
+    
+  border: dotted 1px #d9534f;
+  border-radius: 5px;
+  height: 60%;
+  padding: 8px;
+  margin-top: 2%;
+  margin-bottom: 5%; 
+
+} 
+
+
+.causeTitle {
+    text-align:center;
+}
+
+
+ 
+.moreDetailsBut {
+  margin-top: 2%;
+}
+
+.causeDetails {
+  padding-right: 3%;
+
+}
+
+
+.signButton {
+  margin-top: 2%;
+
+}
+
+.bottomCause {
+  padding-top: 5%;
+  font-weight: bold;
+}
+
+.totalSigs {
+  font-size: 120%;
+}
+
+#signees:hover {
+  text-decoration: underline;
+}
+
+.petDetail {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.seeWho{
+  display: inline;
+}
+
+
+.petitionSigners {
+  display: none;
+}
+
+.seeLess {
+  display: none;
+  color: red;
+  font-size: 80%;
+}
+
+
+/*Search petition Styling ------------------------------*/
+
+.searchArea {
+  margin-bottom: 3%;
+}
+
+.searchPetTitle {
+  text-align: center;
+  padding-bottom: 5%;
+  padding-top: 3%;
+}
+
+#searchForm {
+  border: dotted 1px #d9534f;
+  border-radius: 25px;
+  padding: 5%;
+}
+
+.search {
+  padding-top: 5%;
+}
+
+#sorryMessage {
+  font-size: 130%;
+  display: none;
+}
+
+#emptyMessage {
+  font-size: 130%;
+  display: none;
+}
+
+#searchResults {
+  display: none;
+  padding-bottom: 5%;
+}
+
+/* Class given to each result of search added to searchResults P tag*/
+.searchMatch {
+  font-size: 140%;
+}
+
+
+
+

@@ -1,0 +1,56 @@
+﻿@model CourseworkPart2.Models.Cause
+
+@{
+    ViewBag.Title = "NewCause";
+}
+
+<h2 class="causeTitle">Create A New Cause</h2>
+
+@using (Html.BeginForm("NewCause", "Cause", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.CauseTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CauseTitle, new { htmlAttributes = new { @class = "form-control causeInput", placeholder = "Please Enter A Title", maxlength = "80",  } })
+                @Html.ValidationMessageFor(model => model.CauseTitle, "", new { @class = "text-danger" })
+                <small id="textBeneath">Max Length is 80 characters.</small>
+            </div>
+        </div>
+        <!--Description input-->
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter cause Descrption", maxlength = "1000" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ImagePath, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class = "form-control-file" type="file" name= "file"/>
+                <!--Html.EditorFor(model => model.ImagePath, new { htmlAttributes = new { class = "form-control-file", type="file", name= "ImageFile", accept = "image/png, image/jpeg, image/gif" } }) -->
+                @Html.ValidationMessageFor(model => model.ImagePath, "", new { @class = "text-danger" })
+            </div>
+        </div> 
+        
+      
+        
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Submit" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

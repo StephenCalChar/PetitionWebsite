@@ -1,0 +1,58 @@
+﻿@model IEnumerable<CourseworkPart2.Models.Cause>
+
+
+@{
+    ViewBag.Title = "SearchCause";
+}
+
+
+<div class="container searchArea">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="searchPetTitle">Seach For Petitions</h1>
+            <p>
+                Enter a search term:
+            </p>
+
+
+            <form asp-controller="Cause" asp-action="SearchCause" method="get">
+                <input type="text" name="SearchString" id = "findInput"/>
+                <button type="submit" id="findSubmit" class="btn btn-primary">Find</button>
+
+
+
+            </form>
+
+
+
+
+       
+
+
+            <div class="search"> 
+                <label>@ViewBag.NotFoundMessage</label>
+                <p id="emptyMessage">
+                    Please Enter A Search Word.
+                </p>
+            </div>
+            <!--Search Results area (If any)-->
+            @if (Model != null)
+            {
+                
+                <h2>@Model.Count() Results Found</h2>
+
+                foreach (var item in Model)
+                {
+                    <p><a href="\Cause\CauseExpanded\@item.Id">@item.CauseTitle</a> </p>
+                }
+            }
+         
+
+
+
+
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,29 @@
+﻿@model CourseworkPart2.Models.CauseSignatureViewModel
+@using CourseworkPart2.Models
+
+
+@{
+    int sigCount = 0;
+    List<Signature> causeSigs = new List<Signature>();
+    <!--foreach (var cause in Model.Cause) {-->
+    foreach (Signature signature in Model.Signatures)
+    {
+
+        if (signature.Cause == Model.Causes[0])
+        {
+            causeSigs.Add(signature);
+            sigCount++;
+        }
+
+    }
+}
+
+
+<!--Displays the total signature count and list of usernames who have signed the cause, which are also links to the user's profile-->
+<h3>Total Signatures</h3>
+@sigCount
+<h3>Cause Signees</h3>
+@foreach (Signature signature in causeSigs)
+{
+    <a href="/Member/MemberProfile/@signature.MemberId">@signature.MemberUsername </a>
+}

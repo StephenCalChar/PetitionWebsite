@@ -1,0 +1,162 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+@model CourseworkPart2.Models.CauseSignatureViewModel
+@using CourseworkPart2.Models
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<div class="container-fluid">
+
+    <div class="row">
+        <!-- Left side main Bootstrap Column -->
+        <div class="col-md-12 ml-0">
+            <div class="box" id="leftMain">
+                <!-- start of main column on left -->
+                <h1 id="mainTitle">Welcome to Petitioning.com</h1>
+                <hr />
+                <h2 id="secondTitle"> Who are we</h2>
+                <p>
+                    Every day, people come to Petitioning.com to start petitions that boldly call for the changes they want to see in the world.
+                    Become a Subscriber today and help support more people to fight injustice and win campaigns.
+                </p>
+                <hr />
+                <h1 id="secondTitle">See Our Causes</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="container-fluid">
+
+    <div class="row outerCauseDiv">
+
+
+
+        <!--foreach (var cause in Model.Causes) {-->
+        <!--Had to switch to an indexed loop instead of object loop as the object loop was not working properly. Indexed is working very well though-->
+        @for (Int32 i = 0; i < Model.Causes.Count(); i++)
+        {
+            <!--Here some code is ran in c# to create a list of signatures for each cause and to count the total-->
+            int sigCount = 0;
+            List<Signature> causeSigs = new List<Signature>();
+            {
+
+                foreach (Signature signature in Model.Signatures)
+                {
+
+
+                    if (signature.CauseId == @Model.Causes[i].Id)
+                    {
+                        causeSigs.Add(signature);
+                        sigCount++;
+                    }
+
+
+                }
+            }
+            <div class="row cause">
+                <div class="col-md-12 ml-0"><h2 class="causeTitle">@Model.Causes[i].CauseTitle</h2></div>
+
+
+
+                <!-- Example Petition --->
+                <!-- Left column with Picture --->
+
+
+                <div class="col-md-4 ml-0">
+                    <img src="/UploadedImages/pension.jpg" class="img-thumbnail">
+                    <p class="petDetail"> Petition Details</p>
+                    <p>Created By <a href="/Member/MemberProfile/@Model.Causes[i].CreatedBy.MemberId">@Model.Causes[i].CreatedBy.Name</a> </p>
+                    <p>Created On @Model.Causes[i].CreatedOn</p>
+                    @if (sigCount > 0)
+                    {
+                        <p>Last Signed By <a href="/Member/MemberProfile/@causeSigs[causeSigs.Count() - 1].MemberId">@causeSigs[causeSigs.Count() - 1].MemberUsername</a></p>
+                        <p> <a>Last Signed On @causeSigs[causeSigs.Count() - 1].SignatureTime</a> </p>
+                    }
+                </div>
+                <!-- Right column with details and Title --->
+                <!-- title-->
+                <div class="col-md-8 ml-0">
+
+                    <!-- Details-->
+                    <p class="causeDetails">
+                        @Model.Causes[i].Description
+                    </p>
+                </div>
+
+                <!-- Next set of columns -->
+                <div class="col-md-4 ml-0">
+                    <!-- Left side of 2nd set of columns -->
+
+
+                </div>
+                <div class="col-md-8 ml-0">
+                    <!-- Right side of 2nd set of columns -->
+                    <!-- Right side of 2nd set of column split into two further columns -->
+                    <div class="row">
+                        <!-- Left side coumn -->
+                        <div class="col-md-6 ml-0"><a href="/Cause/CauseExpanded/@Model.Causes[i].Id" type="button" class="btn btn-primary btn-xs">Click For More Details</a></div>
+                        <!-- Right side coumn -->
+                        <div class="col-md-6 ml-0"><a href="/Cause/SignCause/@Model.Causes[i].Id" type="button" class="btn btn-primary btn-xs signButton">Sign This Petition</a></div>
+                    </div>
+                    <!-- Very bottom of right side cause -->
+                    <div class="row">
+                        <!-- Only one column -->
+                        <div class="col-md-12 ml-0 bottomCause">
+                            <p>
+                                Total Signatures: <span class="totalSigs">@sigCount</span>
+                            </p>
+                            <p class="seeWho">
+                                See who has signed <a href="" class="signees">here</a>
+                                <div class="petitionSigners">
+                                    @foreach (Signature signature in Model.Signatures)
+                                    {
+                                        if (signature.CauseId == @Model.Causes[i].Id)
+                                        {
+                                            <a href="/Member/MemberProfile/@signature.MemberId">@signature.MemberUsername </a>
+
+                                        }
+
+                                    }
+
+                                </div>
+                            </p>
+                            <p class="petitionSigners">
+                                <!-- to be filled by Jquery -->
+                            </p>
+                            <p class="removeSeeWHo">
+                                <a href="" class="seeLess">See Less</a>
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+
+            </div>
+
+
+
+
+        }
+    </div>
+</div>
+
+
+
+
+<!-- End Example Petition --->
+

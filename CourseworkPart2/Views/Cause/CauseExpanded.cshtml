@@ -1,0 +1,120 @@
+﻿@model CourseworkPart2.Models.CauseSignatureViewModel
+@using CourseworkPart2.Models
+
+@{
+    ViewBag.Title = "CauseExpanded";
+
+}
+
+
+@{
+    int sigCount = 0;
+    List<Signature> causeSigs = new List<Signature>();
+    <!--foreach (var cause in Model.Cause) {-->
+    foreach (Signature signature in Model.Signatures)
+    {
+
+        if (signature.Cause == Model.Causes[0])
+        {
+            causeSigs.Add(signature);
+            sigCount++;
+        }
+
+    }
+}
+<!--Only one Cause will ever be displayed on this page, however the model contains a list of causes but the controller has only passed in the 1 Cause required.-->
+<!--This is why it is being referenced by position 0-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 ml-0">
+            <img src="~/UploadedImages/pension.jpg" class="img-thumbnail">
+            <h2>@Model.Causes[0].CauseTitle</h2>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- First Petition --->
+<div class="container-fluid">
+    <div class="row">
+        <!-- Left column with Picture --->
+        <div class="col-md-3 ml-0">
+            <h3>Created By</h3>
+            <a href="/Member/MemberProfile/@Model.Causes[0].CreatedBy.MemberId">@Model.Causes[0].CreatedBy.Username</a>
+            <h3>Date Created</h3>
+            @Model.Causes[0].CreatedOn
+
+            <!-- Partial View for Signatures and Signature Count-->
+            <div id="sigPartialView">
+                @Html.Partial("_SignaturesPartialView", Model)
+            </div>
+
+
+        </div>
+        <!-- Right column with details and Title --->
+   
+        <div class="col-md-9 ml-0">
+
+            <h3>Description</h3>
+            @Model.Causes[0].Description
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- Left column with Picture --->
+                    <div class="col-md-6 ml-0">
+
+                        <a href="/Cause/SignCause/@Model.Causes[0].Id" type="button" class="btn btn-primary btn-xs">Sign This Petition</a>
+                    </div>
+                    <div class="col-md-6 ml-0">
+
+                        <!--Delete Cause button will only appear if logged in as "Admin"-->
+                        @if (Session["Username"].ToString() == "Admin" || Session["Username"].ToString() == "admin")
+                        {
+                            <div class="col-md-6 ml-0"><a href="/Cause/DeleteCause/@Model.Causes[0].Id" type="button" class="btn btn-primary btn-xs signButton">Delete</a></div>
+                        }
+                    </div>
+                </div> <!--End split of 2 button sections-->
+            </div>
+            <!--Full sized social media section-->
+            <div class="socialMedia">
+                <h3>Share This Cause!</h3>
+                <!--sharing buttons taken from https://www.sharethis.com/. Reddit and Twitter only. Facebook would not work with the project structure as
+                     it kept sharing the log in page (as this is the page yo are redirected to, if you try to view this page without being logged in)-->
+                <div class="sharethis-inline-share-buttons"></div>
+            </div>
+        </div>
+
+
+        <!-- Right side coumn -->
+
+
+
+
+
+        <script language="javascript" type="text/javascript">
+
+
+            /*AJAX request on timer adapted from http://makitweb.com/how-to-fire-ajax-request-on-regular-interval/  by Yogesh Singh Posted January 23rd, 2018*/
+            // Reloads partial view showing signatures and signature count.
+            //could not call it from external style sheet due to needing the c# code in the url.
+            $(document).ready(function () {
+                (function fetchdata() {
+                    $.ajax({
+                        url: '/Cause/updateSigs/@Model.Causes[0].Id',
+                        type: 'get',
+                        success: function (data) {
+                            $('#sigPartialView').html(data);
+                        },
+                        complete: function () {
+                            setTimeout(fetchdata, 5000);
+                        }
+                    });
+                })();
+
+
+            });
+
+
+
+
+        </script>
